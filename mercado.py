@@ -71,16 +71,15 @@ def cadastrar_produto() -> None:
     texto_centralizado(40, 'Cadastro de Produto')
     linha('=', 40)
 
-    nome: str = str(input('Informe o nome do produto: '))
-    preco: str = str(input('Informe o preço do produto: '))
-    if nome:
-        if preco.isnumeric():
-            preco: int = int(preco)
-            produto: Produto = Produto(nome, preco)
-            produtos.append(produto)
-    else:
-        while
-    print(f'O produto {produto.nome} foi cadastrado com sucesso!')
+    nome: str = ''
+    preco: float = 0
+    while not nome:
+        nome: str = str(input('Informe o nome do produto: '))
+    while not preco:
+        preco: float = float(input('Informe o preço do produto: '))               
+        produto: Produto = Produto(nome, preco)
+        produtos.append(produto)
+        print(f'O produto {produto.nome} foi cadastrado com sucesso!')
     sleep(2)
     menu()
 
@@ -178,7 +177,7 @@ def fechar_pedido() -> None:
 
 
 def produto_codigo(codigo: int) -> Produto:
-    p: Produto = None
+    p: Produto = int
     for produto in produtos:
         if produto.codigo == codigo:
             p = produto
