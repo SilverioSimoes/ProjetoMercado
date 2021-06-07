@@ -92,10 +92,10 @@ def listar_produtos() -> None:
         linha('-', 40)
         texto_centralizado(40, 'Lista de produtos')
         linha('-', 40)
-    for produto in produtos:
-        print(produto)
-        linha('-', 40)
-        sleep(1)
+        for produto in produtos:
+            print(produto)
+            linha('-', 40)
+            sleep(1)
     else:
         print('Ainda não existem produtos cadastrados.')
     sleep(2)
@@ -179,12 +179,12 @@ def fechar_pedido() -> None:
     menu()
 
 
-def produto_codigo(codigo: int) -> Produto:
+def produto_codigo(codigo) -> Produto:
 
     for produto in produtos:
         if produto.codigo == codigo:
             p = produto
-    return p
+            return p
 
 
 if __name__ == '__main__':
