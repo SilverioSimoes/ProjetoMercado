@@ -1,7 +1,14 @@
+from os import read
 from typing import List, Dict
 from time import sleep
 from models.produto import Produto
 from utils.helper import formata_moeda
+from csv import (
+    DictReader,
+    DictWriter,
+    writer,
+    reader,
+)
 
 produtos: List[Produto] = []
 carrinho: List[Dict[Produto, int]] = []
@@ -79,6 +86,19 @@ def cadastrar_produto() -> None:
     while not preco.isnumeric():
         print('O preço precisa ser um número! Tente novamente...')
         preco = str(input('Informe o preço do produto: '))               
+    with open('cadastro_produtos.csv', 'w') as arquivo:
+        cabecalho = ['Departamento', 'Nome', 'Preço']
+        escritor_csv = DictWriter(arquivo, fieldnames=cabecalho)
+        escritor_csv.writeheader()
+        filme = None
+        while filme != 'Sair':
+            filme = input('Digite o nome do filme: ').title()
+            if filme != 'Sair':
+                genero = input('Digite o gênero do filme: ').title()
+                duracao = input('Digite a duração (em minutos): ')
+                # As chaves do dicionário devem ser as mesmas do cabeçalho
+                escritor_csv.writerow({'Título': filme, 'Gênero': genero, 'Duração': duracao})
+
     preco = int(preco)
     produto: Produto = Produto(nome, preco)
     produtos.append(produto)
@@ -117,7 +137,7 @@ def comprar_produto() -> None:
             if len(carrinho) > 0:
                 item_no_carrinho: bool = False
                 for item in carrinho:
-                    quant: int = item.get(produto)
+                    quant = item.get(produto)
                     if quant:
                         item[produto] = quant + 1
                         print(f'O produto {produto.nome} agora possui {quant + 1} unidades no carrinho.')
