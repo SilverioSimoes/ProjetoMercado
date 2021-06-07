@@ -3,11 +3,11 @@ from utils.helper import formata_moeda
 
 class Produto:
     contador = 1
-    
+
     def __init__(self, nome: str, preco: float) -> None:
         self.__codigo: int = Produto.contador
         self.__nome: str = nome
-        self.__preco: float = preco
+        self.__preco = preco
         Produto.contador += 1
 
     @property
