@@ -2,7 +2,9 @@ from utils.helper import formata_moeda
 
 
 class Produto:
-    def __init__(self: object, nome: str, preco: float) -> None:
+    contador = 1
+    
+    def __init__(self, nome: str, preco: float) -> None:
         self.__codigo: int = Produto.contador
         self.__nome: str = nome
         self.__preco: float = preco
